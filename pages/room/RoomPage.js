@@ -15,7 +15,8 @@ export default function RoomPage() {
           <Flex direction='column' bg="white" width="6xl" border="true" borderRadius={10} borderWidth={4}>
             <Flex direction="row" justifyContent="start" alignItems="center" p={4}>
               {/* <Image src="../public/logo.png" width={100} height={100} p={4} /> */}
-              <Image fallbackSrc="../../public/logo.png" />
+              <Icon></Icon>
+              {/* <Image fallbackSrc="../../public/logo.png" /> */}
               <Button colorScheme="red"></Button>
               <Button colorScheme="blue"></Button>
             </Flex>
