@@ -126,30 +126,31 @@ export default function Home() {
 
   return (
     // BLEOW COMMENTED OUT FOR TESTING PURPOSES
-    // <RoomPage />
-    <Flex direction="column" align="center" bg="#f1f7fc" p={4}>
-      <Flex direction='column' align="center" bg="white" maxW="3xl" maxH="3xl" border="true" borderRadius={10} borderWidth={4}>
-        <Stack align="center" p={4}>
-          <Image src="/logo.svg" width={200} height={200} size="lg" p={4} />
-          <Spacer size="lg" />
-          <Heading as="h1" size="lg" fontFamily="Ubuntu">Tinder For Gamers - Beta</Heading>
-          <Spacer size="lg" />
-          {/* SUPER RATCHET DIV */}
-          <Flex bg="#e3e8ef" borderRadius={10} h={1} w={350}></Flex>
-          <Spacer size="lg" />
-          <Flex direction="column" justify="center">
+    <RoomPage />
 
-            {/* FOR TESTING PURPOSES */}
+    // <Flex direction="column" align="center" bg="#f1f7fc" p={4}>
+    //   <Flex direction='column' align="center" bg="white" maxW="3xl" maxH="3xl" border="true" borderRadius={10} borderWidth={4}>
+    //     <Stack align="center" p={4}>
+    //       <Image src="/logo.svg" width={200} height={200} size="lg" p={4} />
+    //       <Spacer size="lg" />
+    //       <Heading as="h1" size="lg" fontFamily="Ubuntu">Tinder For Gamers - Beta</Heading>
+    //       <Spacer size="lg" />
+    //       {/* SUPER RATCHET DIV */}
+    //       <Flex bg="#e3e8ef" borderRadius={10} h={1} w={350}></Flex>
+    //       <Spacer size="lg" />
+    //       <Flex direction="column" justify="center">
 
-            <LandingPage />
+    //         {/* FOR TESTING PURPOSES */}
 
-            {/* <JoinPage /> */}
+    //         {/* <LandingPage /> */}
 
-            {/* <CreatePage /> */}
+    //         {/* <JoinPage /> */}
 
-          </Flex>
-        </Stack>
-      </Flex>
-    </Flex >
+    //         {/* <CreatePage /> */}
+
+    //       </Flex>
+    //     </Stack>
+    //   </Flex>
+    // </Flex >
   )
 }
