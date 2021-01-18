@@ -66,6 +66,7 @@ function Room(props) {
             let initialUsers = data.getRoomInfo.map((user) => {
                 return user.steamID
             })
+            console.log(data)
             updateUsers(initialUsers)
         }
     })
