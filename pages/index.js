@@ -1,12 +1,15 @@
 import Head from 'next/head';
 import Next from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Flex, Spacer, Box, Heading, Text, Input, Button, Container, Center, Stack, Divider } from '@chakra-ui/react';
+import { IconButton, Flex, Spacer, Box, Heading, Text, Input, Button, Container, Center, Stack, Divider, HStack } from '@chakra-ui/react';
+import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import Image from 'next/image';
 import React from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter, Router } from 'next/router';
 import Fade from 'react-reveal';
+
+
 
 //graphql data fetching
 const UPDATE_JOIN_ROOM = gql`
@@ -27,13 +30,15 @@ const UPDATE_CREATE_ROOM = gql`
   }
 `
 
-export function LandingPage({changeType}) {
+export function LandingPage({ changeType }) {
   return (
     <Fade>
       <Stack direction="column" align="center" size="xl">
-        <Text fontFamily="Oxygen" fontSize="lg" fontWeight="bold" fontStyle="italic">Get Started:</Text>
-        <Button colorScheme="red" width="xs" fontFamily="Oxygen" onClick={() => changeType("join")} >Join Room</Button>
-        <Button colorScheme="red" width="xs" fontFamily="Oxygen" onClick={() => changeType("create")}>Create Room</Button>
+        <Text fontFamily="Inter" width="xs" fontSize="lg" fontWeight="Black" textAlign="center" fontStyle="Black">Get Started:</Text>
+        <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => changeType("join")} >Join Room</Button>
+        <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => changeType("create")}>Create Room</Button>
+
+        {/* <IconButton colorScheme="red" width="xs" icon={<ArrowForwardIcon />} onClick={() => changeType("create")} aria-label="Search database" /> */}
       </Stack>
     </Fade>
   )
@@ -54,7 +59,7 @@ export function JoinPage() {
     onCompleted: async (room) => {
       router.push({
         pathname: '/room/[roomcode]',
-        query: {roomcode: roomcode.replace('#', '')}
+        query: { roomcode: roomcode.replace('#', '') }
       })
     }
   })
@@ -69,12 +74,18 @@ export function JoinPage() {
 
 
   return (
+    // JoinRoom GUI
     <Fade>
       <Stack direction="column" align="center" size="xl">
-        <Text fontFamily="Oxygen" fontSize="lg" fontWeight="bold" fontStyle="italic">Join Room:</Text>
-        <Input width="xs" fontFamily="Oxygen" placeholder="Steam ID" onChange={handleJoinID} value={joinSteamID} />
-        <Input width="xs" fontFamily="Oxygen" placeholder="Invite Code" value={roomcode} onChange={handleRoomCode} />
-        <Button colorScheme="red" width="xs" fontFamily="Oxygen" onClick={() => joinRoomLogic()}>Submit</Button>
+        <Text fontFamily="Ubuntu" fontSize="lg" fontWeight="bold" fontStyle="italic">Join Room:</Text>
+        <Input width="xs" fontFamily="Ubuntu" placeholder="Steam ID" onChange={handleJoinID} value={joinSteamID} />
+        <Input width="xs" fontFamily="Ubuntu" placeholder="Invite Code" value={roomcode} onChange={handleRoomCode} />
+        <HStack direction="horizontal" align="center" size="s">
+          <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} />
+          <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => joinRoomLogic()} />
+        </HStack>
+        {/* <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => joinRoomLogic()}>Submit</Button> */}
+        {/* <IconButton width="xs" icon={<ArrowBackIcon />} />  */}
       </Stack>
     </Fade>
   )
@@ -107,12 +118,15 @@ export function CreatePage() {
   }
 
   return (
+    // CreateRoom GUI
     <Fade>
       <Stack direction="column" align="center" size="xl">
-
-        <Text fontFamily="Oxygen" fontSize="lg" fontWeight="bold" fontStyle="italic" >Create Room:</Text>
-        <Input width="xs" fontFamily="Oxygen" placeholder="Steam ID" value={createSteamID} onChange={handleCreateID} />
-        <Button colorScheme="red" width="xs" fontFamily="Oxygen" onClick={() => createRoomLogic()}>Submit</Button>
+        <Text fontFamily="Inter" fontSize="lg" fontWeight="bold" fontStyle="italic" >Create Room:</Text>
+        <Input width="xs" fontFamily="Inter" placeholder="Steam ID" value={createSteamID} onChange={handleCreateID} />
+        <HStack direction="horizontal" align="center" size="s">
+          <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} />
+          <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} />
+        </HStack>
       </Stack>
     </Fade>
   )
@@ -123,24 +137,26 @@ export default function Home() {
   const [currentMenu, changeCurrentMenu] = React.useState("")
 
   return (
+    // Main Page
     <Flex direction="column" align="center" bg="#f1f7fc" p={4}>
       <Flex direction='column' align="center" bg="white" maxW="3xl" maxH="3xl" border="true" borderRadius={10} borderWidth={4}>
         <Stack align="center" p={4}>
           <Image src="/logo.svg" width={200} height={200} size="lg" p={4} />
           <Spacer size="lg" />
-          <Heading as="h1" size="lg" fontFamily="Ubuntu">Tinder For Gamers - Beta</Heading>
+          <Heading as="h1" size="lg" fontFamily="Montserrat">Tinder For Gamers - Beta</Heading>
           <Spacer size="lg" />
           <Flex bg="#e3e8ef" borderRadius={10} h={1} w={350}></Flex>
           <Spacer size="lg" />
+          // Individual pages underneath
           <Flex direction="column" justify="center">
             {currentMenu === "join" && (
-              <JoinPage/>
+              <JoinPage />
             )}
             {currentMenu === "create" && (
-              <CreatePage/>
+              <CreatePage />
             )}
             {currentMenu === "" && (
-              <LandingPage changeType={changeCurrentMenu}/>
+              <LandingPage changeType={changeCurrentMenu} />
             )}
           </Flex>
         </Stack>
