@@ -128,7 +128,7 @@ export function CreatePage() {
           <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} />
         </HStack>
       </Stack>
-    </Fade>
+    </Fade >
   )
 }
 
