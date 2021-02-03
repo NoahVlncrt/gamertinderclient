@@ -13,12 +13,12 @@ const GET_ROOM_INFO = gql`
     }
 `
 const GET_MATCHING_GAMES = gql`
-    query updatedFindSimiliarGames($roomusers: [String]) {
-        updatedFindSimiliarGames(roomusers: $roomusers) {
-            id
+    query getSimiliarGames($gamers: [String]) {
+        getSimiliarGames(gamers: $gamers) {
             name
             appID
             header
+            collectivePlayTime
         }
     }
 `
@@ -33,27 +33,6 @@ function ButtonController({selectedUsers, user, click}){
         <Button variant="outline">{user.nickname}</Button>
     )
 }
-
-function GameList({users}) {
-    const [getGames, {loading, data, error}] = useLazyQuery(GET_MATCHING_GAMES)
-    if(loading) return <p>loading</p>
-    if(error) return <p>error</p>
-    if(users.length > 0){
-        console.log(users)
-        getGames({variables: {roomusers: users}})
-    }
-    return (
-        <Flex>
-            <p>yeet</p>
-            {data.updatedFindSimiliarGames.map((game) => {
-                return <p>test</p>
-            })}
-        </Flex>
-    )
-}
-
-
-
 
 
 function Room(props) {
@@ -71,13 +50,14 @@ function Room(props) {
         }
     })
     const {loading: gameLoading, data:gameData, error: gameError} = useQuery(GET_MATCHING_GAMES, {
-        variables: {roomusers: selectedUsers}
+        variables: {gamers: selectedUsers}
     })
     if(roomLoading) return <p>loading</p>
     if(roomError) return <p>{roomError}</p>
 
     if(gameLoading) return <p>loading</p>
     if(gameError) return <p>error</p>
+    console.log(gameData)
 
 
 
@@ -88,10 +68,11 @@ function Room(props) {
                 return <ButtonController key={user.steamID} selectedUsers={selectedUsers} user={user} name={user.steamID}></ButtonController>
             })}
             <Flex wrap="wrap">
-                {gameData.updatedFindSimiliarGames.map((game) => {
+                {gameData.getSimiliarGames.map((game) => {
                     return <Box borderWidth={1} margin="5px">
                         <Image height={100} width={200} src={game.header}/>
                         <Text>{game.name}</Text>
+                        <Text>{game.collectivePlayTime}</Text>
                     </Box>
                 })}
             </Flex>
