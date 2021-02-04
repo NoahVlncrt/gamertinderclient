@@ -44,7 +44,7 @@ export function LandingPage({ changeType }) {
   )
 }
 
-export function JoinPage() {
+export function JoinPage({ changeType }) {
   const router = useRouter()
 
   const [joinSteamID, setJoinID] = React.useState("")
@@ -81,7 +81,9 @@ export function JoinPage() {
         <Input width="xs" fontFamily="Ubuntu" placeholder="Steam ID" onChange={handleJoinID} value={joinSteamID} />
         <Input width="xs" fontFamily="Ubuntu" placeholder="Invite Code" value={roomcode} onChange={handleRoomCode} />
         <HStack direction="horizontal" align="center" size="s">
-          <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} />
+          {/* <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick{() => } /> */}
+
+          <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick={() => changeType("")} />
           <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => joinRoomLogic()} />
         </HStack>
         {/* <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => joinRoomLogic()}>Submit</Button> */}
@@ -124,7 +126,7 @@ export function CreatePage() {
         <Text fontFamily="Inter" fontSize="lg" fontWeight="bold" fontStyle="italic" >Create Room:</Text>
         <Input width="xs" fontFamily="Inter" placeholder="Steam ID" value={createSteamID} onChange={handleCreateID} />
         <HStack direction="horizontal" align="center" size="s">
-          <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} />
+          <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick={() => changeType("")} />
           <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} />
         </HStack>
       </Stack>
@@ -150,10 +152,10 @@ export default function Home() {
           // Individual pages underneath
           <Flex direction="column" justify="center">
             {currentMenu === "join" && (
-              <JoinPage />
+              <JoinPage changeType={changeCurrentMenu} />
             )}
             {currentMenu === "create" && (
-              <CreatePage />
+              <CreatePage changeType={changeCurrentMenu} />
             )}
             {currentMenu === "" && (
               <LandingPage changeType={changeCurrentMenu} />
