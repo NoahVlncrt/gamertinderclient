@@ -5,7 +5,7 @@ import { Box, Heading, Text, Flex, VStack } from '@chakra-ui/react';
 export default function GameCard({ gameInfo }) {
     console.log(gameInfo);
     return (
-        <Box maxW="s" borderWidth={5} borderRadius={5} overflow="hidden" shadow="lg" size="xs">
+        <Box maxW="s" borderWidth={5} borderRadius={5} overflow="hidden" shadow="lg" size="s" bg="#fff">
             <VStack padding={3} alignItems="left" size="xs">
                 {/* Library image */}
                 <Flex size="xs">

@@ -5,7 +5,7 @@ import Image from "next/image"
 export default function UserCard({ user }) {
     console.log(user);
     return (
-        <Box margin={2} maxWidth="md">
+        <Box margin={2} maxWidth="s" size="s" bg="#fff">
             <HStack borderWidth={5} borderRadius={5} overflow="hidden" shadow="lg" size="xs" padding={5}>
                 <Flex minWidth={92} minHeight={92}>
                     <Image width={92} height={92} src={user.icon} />
