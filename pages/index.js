@@ -94,7 +94,7 @@ export function JoinPage({ changeType }) {
   )
 }
 
-export function CreatePage() {
+export function CreatePage({ changeType }) {
   const router = useRouter()
   const [createSteamID, setCreateID] = React.useState("")
   const handleCreateID = (event) => setCreateID(event.target.value)
