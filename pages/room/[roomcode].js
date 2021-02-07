@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
-import { Flex, Text, Button, Heading, useControllableState, Box, HStack, VStack, Spacer, Center } from '@chakra-ui/react'
+import { Flex, Text, Button, Heading, useControllableState, Box, HStack, VStack, Spacer, Center, Container } from '@chakra-ui/react'
 import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import Image from 'next/image'
-import GameCard from '../components/GameCard'
-import UserCard from '../components/UserCard'
+import GameCard from '../../components/GameCard'
+import UserCard from '../../components/UserCard'
 import Head from 'next/head'
 
 
@@ -68,7 +68,6 @@ function Room(props) {
 
 
     return (
-        <Center w="6xl" size="6xl">
             <Box bgGradient="linear(to-t, #DB4D47, #FF4D47)">
                 <VStack >
                     <VStack alignContent="left">
@@ -105,7 +104,6 @@ function Room(props) {
                     </HStack>
                 </VStack>
             </Box>
-        </Center >
     )
 }
 
