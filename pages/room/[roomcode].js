@@ -69,12 +69,12 @@ function Room(props) {
 
     return (
             <Box bgGradient="linear(to-t, #DB4D47, #FF4D47)">
-                <VStack >
+                <VStack>
                     <VStack alignContent="left">
                         <Heading as="h1">Tinderforgamers</Heading>
                         <Text>RoomCode: {roomCode}</Text>
                     </VStack>
-                    <HStack>
+                    <HStack justifyContent="space-between" width="100%">
                         {/* <Flex align="center" w="6xl" direction="vertical" minW="6xl" padding={5} alignItems="stretch" justifyContent="center" grow={1}> */}
                         <Head>
                             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
