@@ -8,6 +8,7 @@ import React from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter, Router } from 'next/router';
 import Fade from 'react-reveal';
+import Room from './room/[roomcode]';
 
 
 
@@ -141,7 +142,7 @@ export default function Home() {
   return (
     // Main Page
     <Flex direction="column" align="center" bg="#f1f7fc" p={4}>
-      <Flex direction='column' align="center" bg="white" maxW="3xl" maxH="3xl" border="true" borderRadius={10} borderWidth={4}>
+      <Flex direction='column' align="center" bg="white" maxW="3xl" maxH="3xl" border="true" borderRadius={10} borderWidth={5} shadow="md">
         <Stack align="center" p={4}>
           <Image src="/logo.svg" width={200} height={200} size="lg" p={4} />
           <Spacer size="lg" />
