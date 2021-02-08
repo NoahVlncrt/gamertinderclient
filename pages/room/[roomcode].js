@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
-import { Flex, Text, Button, Heading, useControllableState, Box, HStack, VStack, Spacer, Center, Container } from '@chakra-ui/react'
+import { Flex, Text, Button, Heading, useControllableState, Box, HStack, VStack, Spacer, Center, Container, Grid } from '@chakra-ui/react'
 import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import Image from 'next/image'
 import GameCard from '../../components/GameCard'
@@ -68,42 +68,47 @@ function Room(props) {
 
 
     return (
-            <Box bgGradient="linear(to-t, #DB4D47, #FF4D47)">
-                <VStack>
-                    <VStack alignContent="left">
-                        <Heading as="h1">Tinderforgamers</Heading>
-                        <Text>RoomCode: {roomCode}</Text>
-                    </VStack>
-                    <HStack justifyContent="space-between" width="100%">
-                        {/* <Flex align="center" w="6xl" direction="vertical" minW="6xl" padding={5} alignItems="stretch" justifyContent="center" grow={1}> */}
-                        <Head>
-                            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                        </Head>
-
-                        <VStack margin="lg" spacing="md">
-                            <Flex wrap="wrap" maxH="6xl" maxW="xl" borderRadius={5} borderWidth={5} margin={5} padding={5} overflowY="scroll" align="center" >
-                                {gameData.getSimiliarGames.map((game) => {
-                                    return (
-                                        <GameCard gameInfo={game} />
-                                    )
-                                })}
-                            </Flex>
-                        </VStack>
-                        <Spacer />
-
-
-                        <VStack alignItems="right" minW="lg">
-                            <VStack margin="lg" spacing="md" minW="lg">
-                                {roomInfo.getRoomInfo.map((user) => {
-                                    return <UserCard user={user} />
-                                })}
-                            </VStack>
-                        </VStack>
-
-                        {/* </Flex > */}
-                    </HStack>
+        <Box bg="#fff">
+            <VStack>
+                <VStack alignContent="left">
+                    <Heading as="h1">Tinderforgamers</Heading>
+                    <Text>RoomCode: {roomCode}</Text>
                 </VStack>
-            </Box>
+                <HStack justifyContent="space-between" width="100%" alignItems="flex-start">
+                    {/* <Flex align="center" w="6xl" direction="vertical" minW="6xl" padding={5} alignItems="stretch" justifyContent="center" grow={1}> */}
+                    <Head>
+                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    </Head>
+                    {/* Games grid */}
+
+                    <VStack margin="lg" spacing="md" maxH="6xl">
+                        {/* <Flex wrap="wrap" maxH="6xl" maxW="xl" borderRadius={5} borderWidth={5} margin={5} padding={5} overflowY="scroll" align="center" > */}
+                        <Grid templateColumns="repeat(3,14fr)" gap={3} borderRadius={5} padding={3} margin={5} bg="#D2DCE1" minH="md">
+                            {gameData.getSimiliarGames.map((game) => {
+                                return (
+                                    <GameCard gameInfo={game} />
+                                )
+                            })}
+                        </Grid>
+                        {/* </Flex> */}
+                    </VStack>
+                    <Spacer />
+
+                    {/* Player cards grid */}
+                    <VStack alignItems="flex-end" minW="lg" margin="lg" spacing="md">
+                        {/* <VStack margin="lg" spacing="md" minW="lg"> */}
+                        <Grid templateColumns="repeat(1, 1fr)" gap={5} borderRadius={5} padding={5} margin={5} bg="#D2DCE1" maxW="sm" maxH="sm">
+                            {roomInfo.getRoomInfo.map((user) => {
+                                return <UserCard user={user} />
+                            })}
+                        </Grid>
+                        {/* </VStack> */}
+                    </VStack>
+
+                    {/* </Flex > */}
+                </HStack>
+            </VStack>
+        </Box>
     )
 }
 
