@@ -68,44 +68,40 @@ function Room(props) {
 
 
     return (
-        <Box bg="#fff">
+        <Box bg="#f1f7fc">
             <VStack>
-                <VStack alignContent="left">
-                    <Heading as="h1">Tinderforgamers</Heading>
+                <VStack justifyContent="flex=start">
+                    <Heading as="h1">What's in our library?</Heading>
                     <Text>RoomCode: {roomCode}</Text>
                 </VStack>
                 <HStack justifyContent="space-between" width="100%" alignItems="flex-start">
-                    {/* <Flex align="center" w="6xl" direction="vertical" minW="6xl" padding={5} alignItems="stretch" justifyContent="center" grow={1}> */}
                     <Head>
                         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     </Head>
-                    {/* Games grid */}
 
+                    {/* Games grid */}
                     <VStack margin="lg" spacing="md" maxH="6xl">
-                        {/* <Flex wrap="wrap" maxH="6xl" maxW="xl" borderRadius={5} borderWidth={5} margin={5} padding={5} overflowY="scroll" align="center" > */}
-                        <Grid templateColumns="repeat(3,14fr)" gap={3} borderRadius={5} padding={3} margin={5} bg="#D2DCE1" minH="md">
+                        <Grid templateColumns="repeat(3,1fr)" gap={3} borderRadius={5} padding={3} margin={5} bg="#D2DCE1" minH="md">
                             {gameData.getSimiliarGames.map((game) => {
                                 return (
                                     <GameCard gameInfo={game} />
                                 )
                             })}
                         </Grid>
-                        {/* </Flex> */}
                     </VStack>
+
+
                     <Spacer />
 
                     {/* Player cards grid */}
                     <VStack alignItems="flex-end" minW="lg" margin="lg" spacing="md">
-                        {/* <VStack margin="lg" spacing="md" minW="lg"> */}
-                        <Grid templateColumns="repeat(1, 1fr)" gap={5} borderRadius={5} padding={5} margin={5} bg="#D2DCE1" maxW="sm" maxH="sm">
+                        <Grid templateColumns="repeat(1, 1fr)" gap={5} borderRadius={5} padding={5} margin={5} bg="#D2DCE1" maxW="sm">
                             {roomInfo.getRoomInfo.map((user) => {
                                 return <UserCard user={user} />
                             })}
                         </Grid>
-                        {/* </VStack> */}
                     </VStack>
 
-                    {/* </Flex > */}
                 </HStack>
             </VStack>
         </Box>

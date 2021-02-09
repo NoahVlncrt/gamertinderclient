@@ -36,10 +36,9 @@ export function LandingPage({ changeType }) {
     <Fade>
       <Stack direction="column" align="center" size="xl">
         <Text fontFamily="Inter" width="xs" fontSize="lg" fontWeight="Black" textAlign="center" fontStyle="Black">Get Started:</Text>
-        <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => changeType("join")} >Join Room</Button>
-        <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => changeType("create")}>Create Room</Button>
+        <Button colorScheme="blue" width="xs" fontFamily="Inter" onClick={() => changeType("join")} >Join Room</Button>
+        <Button colorScheme="blue" width="xs" fontFamily="Inter" onClick={() => changeType("create")}>Create Room</Button>
 
-        {/* <IconButton colorScheme="red" width="xs" icon={<ArrowForwardIcon />} onClick={() => changeType("create")} aria-label="Search database" /> */}
       </Stack>
     </Fade>
   )
@@ -78,17 +77,13 @@ export function JoinPage({ changeType }) {
     // JoinRoom GUI
     <Fade>
       <Stack direction="column" align="center" size="xl">
-        <Text fontFamily="Ubuntu" fontSize="lg" fontWeight="bold" fontStyle="italic">Join Room:</Text>
-        <Input width="xs" fontFamily="Ubuntu" placeholder="Steam ID" onChange={handleJoinID} value={joinSteamID} />
-        <Input width="xs" fontFamily="Ubuntu" placeholder="Invite Code" value={roomcode} onChange={handleRoomCode} />
+        <Text fontFamily="Inter" fontSize="lg" fontWeight="bold" fontStyle="italic">Join Room:</Text>
+        <Input width="xs" fontFamily="Inter" placeholder="Steam ID" onChange={handleJoinID} value={joinSteamID} />
+        <Input width="xs" fontFamily="Inter" placeholder="Invite Code" value={roomcode} onChange={handleRoomCode} />
         <HStack direction="horizontal" align="center" size="s">
-          {/* <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick{() => } /> */}
-
           <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick={() => changeType("")} />
-          <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => joinRoomLogic()} />
+          <IconButton colorScheme="blue" w="8vw" icon={<ArrowForwardIcon />} onClick={() => joinRoomLogic()} />
         </HStack>
-        {/* <Button colorScheme="red" width="xs" fontFamily="Inter" onClick={() => joinRoomLogic()}>Submit</Button> */}
-        {/* <IconButton width="xs" icon={<ArrowBackIcon />} />  */}
       </Stack>
     </Fade>
   )
@@ -128,7 +123,7 @@ export function CreatePage({ changeType }) {
         <Input width="xs" fontFamily="Inter" placeholder="Steam ID" value={createSteamID} onChange={handleCreateID} />
         <HStack direction="horizontal" align="center" size="s">
           <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick={() => changeType("")} />
-          <IconButton colorScheme="red" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} />
+          <IconButton colorScheme="blue" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} />
         </HStack>
       </Stack>
     </Fade >
@@ -146,7 +141,7 @@ export default function Home() {
         <Stack align="center" p={4}>
           <Image src="/logo.svg" width={200} height={200} size="lg" p={4} />
           <Spacer size="lg" />
-          <Heading as="h1" size="lg" fontFamily="Montserrat">Tinder For Gamers - Beta</Heading>
+          <Heading as="h1" size="lg" fontFamily="Montserrat">Whats in our library?</Heading>
           <Spacer size="lg" />
           <Flex bg="#e3e8ef" borderRadius={10} h={1} w={350}></Flex>
           <Spacer size="lg" />
