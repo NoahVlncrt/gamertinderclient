@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
-import { Flex, Text, Button, Heading, useControllableState, Box, HStack, VStack, Spacer, Center, Container, Grid } from '@chakra-ui/react'
+import { Text, Button, Heading, useControllableState, Box, HStack, VStack, Spacer, Grid } from '@chakra-ui/react'
 import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import Image from 'next/image'
 import GameCard from '../../components/GameCard'

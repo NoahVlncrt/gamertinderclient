@@ -1,14 +1,14 @@
-import Head from 'next/head';
-import Next from 'next/image';
-import styles from '../styles/Home.module.css';
-import { IconButton, Flex, Spacer, Box, Heading, Text, Input, Button, Container, Center, Stack, Divider, HStack } from '@chakra-ui/react';
+// import Head from 'next/head';
+// import Next from 'next/image';
+// import styles from '../styles/Home.module.css';
+import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack } from '@chakra-ui/react';
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 import Image from 'next/image';
 import React from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter, Router } from 'next/router';
 import Fade from 'react-reveal';
-import Room from './room/[roomcode]';
+// import Room from './room/[roomcode]';
 
 
 
