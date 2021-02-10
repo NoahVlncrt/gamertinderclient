@@ -80,7 +80,7 @@ function Room(props) {
                     </Head>
 
                     {/* Games grid */}
-                    <VStack margin="lg" spacing="md" maxH="6xl">
+                    <VStack margin="lg" spacing="md" maxH="6xl" minW="md">
                         <Grid templateColumns="repeat(3,1fr)" gap={3} borderRadius={5} padding={3} margin={5} bg="#D2DCE1" minH="md">
                             {gameData.getSimiliarGames.map((game) => {
                                 return (
