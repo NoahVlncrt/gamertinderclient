@@ -3,11 +3,13 @@
 // import styles from '../styles/Home.module.css';
 import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack } from '@chakra-ui/react';
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
+
 import Image from 'next/image';
 import React from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter, Router } from 'next/router';
 import Fade from 'react-reveal';
+import Footer from '../components/Footer'
 // import Room from './room/[roomcode]';
 
 
@@ -30,6 +32,44 @@ const UPDATE_CREATE_ROOM = gql`
     }
   }
 `
+const footerData = [
+  {
+    name: "Item1",
+    route: "/",
+  },
+  {
+    name: "Item 2",
+    route: "/"
+  },
+  {
+    name: "Item 3",
+    route: "/",
+  },
+]
+
+const footerSocial = [
+  {
+    icon: "fab fa-facebook-f",
+    route: "/",
+  },
+  {
+    icon: "fab fa-twitter",
+    route: "/"
+  },
+  {
+    icon: "fab fa-youtube",
+    route: "/",
+  },
+  {
+    icon: "fab fa-linkedin-in",
+    route: "/",
+  },
+  {
+    icon: "fab fa-instagram",
+    route: "/",
+  },
+]
+
 
 export function LandingPage({ changeType }) {
   return (
@@ -136,10 +176,10 @@ export default function Home() {
 
   return (
     // Main Page
-    <Flex direction="column" align="center" bg="#f1f7fc" p={4}>
-      <Flex direction='column' align="center" bg="white" maxW="3xl" maxH="3xl" border="true" borderRadius={10} borderWidth={5} shadow="md">
-        <Stack align="center" p={4}>
-          <Image src="/logo.svg" width={200} height={200} size="lg" p={4} />
+    <Flex direction="column" align="center" bg="#f1f7fc" p={4} minH="xl" minW="xl">
+      <Flex direction='column' align="center" bg="white" size="lg" border="true" borderRadius={10} borderWidth={5} p={5} shadow="md">
+        <Stack align="center" alignItems="center">
+          <Image src="/logo.svg" width={200} height={200} size="lg" />
           <Spacer size="lg" />
           <Heading as="h1" size="lg" fontFamily="Montserrat">Whats in our library?</Heading>
           <Spacer size="lg" />
@@ -158,7 +198,11 @@ export default function Home() {
             )}
           </Flex>
         </Stack>
+
       </Flex>
+      <Footer />
     </Flex >
+
+
   )
 }
