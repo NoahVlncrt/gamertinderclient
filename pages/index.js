@@ -179,7 +179,7 @@ export default function Home() {
     <Flex direction="column" align="center" bg="#f1f7fc" p={4} minH="xl" minW="xl">
       <Flex direction='column' align="center" bg="white" size="lg" border="true" borderRadius={10} borderWidth={5} p={5} shadow="md">
         <Stack align="center" alignItems="center">
-          <Image src="/logo.svg" width={200} height={200} size="lg" />
+          <Image src="/logo.svg" width="md" height="md" size="lg" />
           <Spacer size="lg" />
           <Heading as="h1" size="lg" fontFamily="Montserrat">Whats in our library?</Heading>
           <Spacer size="lg" />
