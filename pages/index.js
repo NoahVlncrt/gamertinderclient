@@ -1,18 +1,11 @@
-// import Head from 'next/head';
-// import Next from 'next/image';
-// import styles from '../styles/Home.module.css';
 import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack } from '@chakra-ui/react';
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 
 import Image from 'next/image';
 import React from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { useRouter, Router } from 'next/router';
+import { useRouter } from 'next/router';
 import Fade from 'react-reveal';
-import Footer from '../components/Footer'
-// import Room from './room/[roomcode]';
-
-
 
 //graphql data fetching
 const UPDATE_JOIN_ROOM = gql`
@@ -198,11 +191,7 @@ export default function Home() {
             )}
           </Flex>
         </Stack>
-
       </Flex>
-      <Footer />
     </Flex >
-
-
   )
 }
