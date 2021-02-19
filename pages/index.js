@@ -1,4 +1,4 @@
-import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack, Box } from '@chakra-ui/react';
+import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack, Box, Center, VStack } from '@chakra-ui/react';
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 
 import Image from 'next/image';
@@ -7,6 +7,7 @@ import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Fade from 'react-reveal';
 import Header from '../components/Header'
+import Head from 'next/head';
 
 //graphql data fetching
 const UPDATE_JOIN_ROOM = gql`
@@ -171,6 +172,9 @@ export default function Home() {
   return (
     // Main Page
     <Box bg="#f1f7fc">
+      <Head>
+        <title>What's in Our Library</title>
+      </Head>
       <Header/>
       <Flex direction="column" align="center" bg="#f1f7fc" p={4} minH="xl" minW="xl">
         <Flex direction='column' align="center" bg="white" size="lg" border="true" borderRadius={10} borderWidth={5} p={5} shadow="md">
@@ -195,6 +199,14 @@ export default function Home() {
             </Flex>
           </Stack>
         </Flex>
+        <VStack marginTop="15px">
+          <Heading>F.A.Q</Heading>
+
+          <Heading size="md">How Do I Get Started?</Heading>
+          <Text>Click "Join Room" and paste your Steam ID in. Once you create a room send your friend the room code and have them join.</Text>
+          <Heading size="md">How Do I Join A Room?</Heading>
+          <Text>Click Join room and put the roomcode and your Steam ID in. Then click the next arrow.</Text>
+        </VStack>
       </Flex >
     </Box>
   )
