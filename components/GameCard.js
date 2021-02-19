@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image'
-import { Box, Heading, Text, Flex, VStack } from '@chakra-ui/react';
+import { Box, Heading, Text, Flex, VStack, Skeleton } from '@chakra-ui/react';
 import { usePalette } from 'react-palette';
 
 
@@ -28,12 +28,14 @@ export default function GameCard({ gameInfo }) {
     let vibrant = data.vibrant;
 
     return (
-        <Box maxW="s" maxH="s" borderWidth={5} borderRadius={5} overflow="hidden" shadow="lg" size="s">
-            <VStack padding={3} alignItems="left" size="xs" bg={darkMuted}>
+        <Box maxW="s" maxH="s" borderWidth={5} borderRadius={5} shadow="lg" size="s">
+            <VStack padding={3} alignItems="left" size="xs" height="100%" bg={darkMuted}>
                 {/* Library image */}
-                <Flex size="xs">
-                    <Image height={215} width={450} src={gameInfo.header} />
-                </Flex>
+                <Skeleton isLoaded={false}>
+                    <Flex size="xs">
+                        <Image height={215} width={450} src={gameInfo.header} />
+                    </Flex>
+                </Skeleton>
                 {/* <Box>
                     <Image src="https://cdn.akamai.steamstatic.com/steam/apps/620/header.jpg?t=1610490805" maxWidth={230} maxHeight={108}></Image>
                 </Box> */}

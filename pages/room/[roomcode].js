@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router'
-import { Text, Button, Heading, Box, HStack, VStack, Spacer, Grid } from '@chakra-ui/react'
+import { Text, Button, Heading, Box, HStack, VStack, Spacer, Grid, Skeleton, Spinner, Flex} from '@chakra-ui/react'
 import { gql, useQuery, useLazyQuery } from '@apollo/client';
 import GameCard from '../../components/GameCard'
 import UserCard from '../../components/UserCard'
@@ -39,6 +39,13 @@ function ButtonController({ selectedUsers, user, click }) {
     )
 }
 
+function RoomLoading() {
+    return (
+        <Flex>
+            <Spinner/>
+        </Flex>
+    )
+}
 
 function Room(props) {
     const roomCode = `#${props.roomcode}`
@@ -57,57 +64,63 @@ function Room(props) {
     const { loading: gameLoading, data: gameData, error: gameError } = useQuery(GET_MATCHING_GAMES, {
         variables: { gamers: selectedUsers }
     })
-    if (roomLoading) return <p>loading</p>
+    if (roomLoading) return <p/>
     if (roomError) return <p>{roomError}</p>
 
-    if (gameLoading) return <p>loading</p>
+    if (gameLoading) return <p></p>
     if (gameError) return <p>error</p>
-    console.log(gameData)
 
+    if(!gameLoading && !roomLoading){
+        console.log("loading")
+    }
 
 
     return (
-        <Box bg="#f1f7fc">
-            <VStack>
-                <VStack justifyContent="flex=start">
-                    <Heading as="h1">What's in our library?</Heading>
-                    <Text>RoomCode: {roomCode}</Text>
+        <Skeleton isLoaded={!gameLoading && !roomLoading}>
+            <Box bg="#f1f7fc" isLoaded={!gameLoading && !roomLoading}>
+                <VStack>
+                    <VStack justifyContent="flex=start">
+                        <Heading as="h1">What's in our library?</Heading>
+                        <Text>RoomCode: {roomCode}</Text>
+                    </VStack>
+                    <HStack justifyContent="space-between" width="100%" alignItems="flex-start">
+                        <Head>
+                            <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                        </Head>
+
+                        {/* Games grid */}
+                        <Skeleton isLoaded={!gameLoading}>
+                            <VStack margin="lg" spacing="md" minW="md">
+                                <Grid templateColumns="repeat(3,1fr)" gap={3} borderRadius={5} padding={3} margin={5} bg="#D2DCE1" minH="md">
+                                    {gameData.getSimiliarGames.map((game) => {
+                                        return (
+                                            <GameCard gameInfo={game} />
+                                        )
+                                    })}
+                                </Grid>
+                            </VStack>
+                        </Skeleton>
+
+                        <Spacer />
+
+                        {/* Player cards grid */}
+                        <VStack alignItems="flex-end" minW="lg" margin="lg" spacing="md">
+                            <Grid templateColumns="repeat(1, 1fr)" gap={5} borderRadius={5} padding={5} margin={5} bg="#D2DCE1" maxW="sm">
+                                {roomInfo.getRoomInfo.map((user) => {
+                                    return <UserCard user={user} />
+                                })}
+                            </Grid>
+                        </VStack>
+
+                    </HStack>
                 </VStack>
-                <HStack justifyContent="space-between" width="100%" alignItems="flex-start">
-                    <Head>
-                        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                    </Head>
-
-                    {/* Games grid */}
-                    <VStack margin="lg" spacing="md" maxH="6xl" minW="md">
-                        <Grid templateColumns="repeat(3,1fr)" gap={3} borderRadius={5} padding={3} margin={5} bg="#D2DCE1" minH="md">
-                            {gameData.getSimiliarGames.map((game) => {
-                                return (
-                                    <GameCard gameInfo={game} />
-                                )
-                            })}
-                        </Grid>
-                    </VStack>
-
-
-                    <Spacer />
-
-                    {/* Player cards grid */}
-                    <VStack alignItems="flex-end" minW="lg" margin="lg" spacing="md">
-                        <Grid templateColumns="repeat(1, 1fr)" gap={5} borderRadius={5} padding={5} margin={5} bg="#D2DCE1" maxW="sm">
-                            {roomInfo.getRoomInfo.map((user) => {
-                                return <UserCard user={user} />
-                            })}
-                        </Grid>
-                    </VStack>
-
-                </HStack>
-            </VStack>
-        </Box>
+            </Box>
+        </Skeleton>
     )
 }
 
 Room.getInitialProps = ({ query }) => {
+    
     return {
         roomcode: query.roomcode
     }

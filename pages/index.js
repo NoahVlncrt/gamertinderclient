@@ -1,4 +1,4 @@
-import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack } from '@chakra-ui/react';
+import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack, Box } from '@chakra-ui/react';
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 
 import Image from 'next/image';
@@ -6,6 +6,7 @@ import React from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Fade from 'react-reveal';
+import Header from '../components/Header'
 
 //graphql data fetching
 const UPDATE_JOIN_ROOM = gql`
@@ -129,7 +130,7 @@ export function CreatePage({ changeType }) {
 
 
 
-  const [createRoom, { room }] = useMutation(UPDATE_CREATE_ROOM, {
+  const [createRoom, { room, loading: createLoading, error: createError }] = useMutation(UPDATE_CREATE_ROOM, {
     onCompleted: async (room) => {
       console.log(room)
       router.push({
@@ -156,7 +157,7 @@ export function CreatePage({ changeType }) {
         <Input width="xs" fontFamily="Inter" placeholder="Steam ID" value={createSteamID} onChange={handleCreateID} />
         <HStack direction="horizontal" align="center" size="s">
           <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick={() => changeType("")} />
-          <IconButton colorScheme="blue" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} />
+          <IconButton colorScheme="blue" w="8vw" icon={<ArrowForwardIcon />} onClick={() => createRoomLogic()} isLoading={createLoading}/>
         </HStack>
       </Stack>
     </Fade >
@@ -169,29 +170,32 @@ export default function Home() {
 
   return (
     // Main Page
-    <Flex direction="column" align="center" bg="#f1f7fc" p={4} minH="xl" minW="xl">
-      <Flex direction='column' align="center" bg="white" size="lg" border="true" borderRadius={10} borderWidth={5} p={5} shadow="md">
-        <Stack align="center" alignItems="center">
-          <Image src="/logo.svg" width="md" height="md" size="lg" />
-          <Spacer size="lg" />
-          <Heading as="h1" size="lg" fontFamily="Montserrat">Whats in our library?</Heading>
-          <Spacer size="lg" />
-          <Flex bg="#e3e8ef" borderRadius={10} h={1} w={350}></Flex>
-          <Spacer size="lg" />
-          // Individual pages underneath
-          <Flex direction="column" justify="center">
-            {currentMenu === "join" && (
-              <JoinPage changeType={changeCurrentMenu} />
-            )}
-            {currentMenu === "create" && (
-              <CreatePage changeType={changeCurrentMenu} />
-            )}
-            {currentMenu === "" && (
-              <LandingPage changeType={changeCurrentMenu} />
-            )}
-          </Flex>
-        </Stack>
-      </Flex>
-    </Flex >
+    <Box bg="#f1f7fc">
+      <Header/>
+      <Flex direction="column" align="center" bg="#f1f7fc" p={4} minH="xl" minW="xl">
+        <Flex direction='column' align="center" bg="white" size="lg" border="true" borderRadius={10} borderWidth={5} p={5} shadow="md">
+          <Stack align="center" alignItems="center">
+            <Image src="/logo.svg" width="md" height="md" size="lg" />
+            <Spacer size="lg" />
+            <Heading as="h1" size="lg" fontFamily="Montserrat">Whats in our library?</Heading>
+            <Spacer size="lg" />
+            <Flex bg="#e3e8ef" borderRadius={10} h={1} w={350}></Flex>
+            <Spacer size="lg" />
+            // Individual pages underneath
+            <Flex direction="column" justify="center">
+              {currentMenu === "join" && (
+                <JoinPage changeType={changeCurrentMenu} />
+              )}
+              {currentMenu === "create" && (
+                <CreatePage changeType={changeCurrentMenu} />
+              )}
+              {currentMenu === "" && (
+                <LandingPage changeType={changeCurrentMenu} />
+              )}
+            </Flex>
+          </Stack>
+        </Flex>
+      </Flex >
+    </Box>
   )
 }
