@@ -39,13 +39,6 @@ function ButtonController({ selectedUsers, user, click }) {
     )
 }
 
-function RoomLoading() {
-    return (
-        <Flex>
-            <Spinner/>
-        </Flex>
-    )
-}
 
 function Room(props) {
     const roomCode = `#${props.roomcode}`
@@ -57,10 +50,10 @@ function Room(props) {
             let initialUsers = data.getRoomInfo.map((user) => {
                 return user.steamID
             })
-            console.log(data)
             updateUsers(initialUsers)
         }
     })
+    console.log(selectedUsers)
     const { loading: gameLoading, data: gameData, error: gameError } = useQuery(GET_MATCHING_GAMES, {
         variables: { gamers: selectedUsers }
     })
@@ -68,7 +61,7 @@ function Room(props) {
     if (roomError) return <p>{roomError}</p>
 
     if (gameLoading) return <p></p>
-    if (gameError) return <p>error</p>
+    if (gameError) return <p>Not enough people have joined. Invite your friends :)</p>
 
     if(!gameLoading && !roomLoading){
         console.log("loading")
@@ -120,7 +113,7 @@ function Room(props) {
 }
 
 Room.getInitialProps = ({ query }) => {
-    
+
     return {
         roomcode: query.roomcode
     }

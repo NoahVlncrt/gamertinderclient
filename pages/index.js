@@ -1,4 +1,4 @@
-import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack, Box, Center, VStack } from '@chakra-ui/react';
+import { IconButton, Flex, Spacer, Heading, Text, Input, Button, Stack, HStack, Box, useToast, VStack } from '@chakra-ui/react';
 import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 
 import Image from 'next/image';
@@ -14,7 +14,6 @@ const UPDATE_JOIN_ROOM = gql`
   mutation updatedJoinRoom($steamid: String, $roomcode: String) {
     updatedJoinRoom(steamid: $steamid, roomcode: $roomcode){
       id
-      memberIds
       inviteCode
     }
   }
@@ -88,13 +87,22 @@ export function JoinPage({ changeType }) {
   const [roomcode, setRoomCode] = React.useState("")
   const handleRoomCode = (event) => setRoomCode(event.target.value)
 
+  const toast = useToast()
 
-
-  const [joinRoom, { data }] = useMutation(UPDATE_JOIN_ROOM, {
+  const [joinRoom, { data, loading: joinLoading, error: joinError }] = useMutation(UPDATE_JOIN_ROOM, {
     onCompleted: async (room) => {
       router.push({
         pathname: '/room/[roomcode]',
         query: { roomcode: roomcode.replace('#', '') }
+      })
+    },
+    onError: async (room) => {
+      toast({
+        title: "Cannot join room.",
+        description: "SteamID or Roomcode is invalid",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
       })
     }
   })
@@ -117,7 +125,7 @@ export function JoinPage({ changeType }) {
         <Input width="xs" fontFamily="Inter" placeholder="Invite Code" value={roomcode} onChange={handleRoomCode} />
         <HStack direction="horizontal" align="center" size="s">
           <IconButton colorScheme="red" w="8vw" icon={<ArrowBackIcon />} onClick={() => changeType("")} />
-          <IconButton colorScheme="blue" w="8vw" icon={<ArrowForwardIcon />} onClick={() => joinRoomLogic()} />
+          <IconButton colorScheme="blue" w="8vw" icon={<ArrowForwardIcon />} onClick={() => joinRoomLogic()} isLoading={joinLoading}/>
         </HStack>
       </Stack>
     </Fade>
@@ -128,6 +136,7 @@ export function CreatePage({ changeType }) {
   const router = useRouter()
   const [createSteamID, setCreateID] = React.useState("")
   const handleCreateID = (event) => setCreateID(event.target.value)
+  const toast = useToast()
 
 
 
@@ -137,6 +146,16 @@ export function CreatePage({ changeType }) {
       router.push({
         pathname: '/room/[roomcode]',
         query: { roomcode: room.updatedCreateNewRoom.inviteCode.replace('#', '') }
+      })
+    },
+    onError: async (error) => {
+      console.log(error)
+      toast({
+        title: "Cannot create room.",
+        description: "SteamID is invalid",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
       })
     }
   })
